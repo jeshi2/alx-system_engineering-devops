@@ -3,3 +3,4 @@
 2-bring_me_home - will take me to home
 3-listfiles - will list files in long format
 4-listmorefiles - dispaly current content include hidden files with long format
+5-listfilesdigitonly - list files with digit
