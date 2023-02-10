@@ -4,3 +4,5 @@
 3-listfiles - will list files in long format
 4-listmorefiles - dispaly current content include hidden files with long format
 5-listfilesdigitonly - list files with digit
+6-firstdirectory - create a dir in tmp
+7-movethatfile - move betty to another directory
