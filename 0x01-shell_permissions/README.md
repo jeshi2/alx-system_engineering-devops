@@ -5,3 +5,4 @@
 4-empty - create file hello
 5-execute - add execute perm
 6-multiple_permissions - multiple 
+7-everybody - excute all
