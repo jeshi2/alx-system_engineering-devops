@@ -8,3 +8,4 @@
 7-movethatfile - move betty to another directory
 8-firstdelete -delete betty
 9-firstdeletion - delete directory
+10-back - change directory back
