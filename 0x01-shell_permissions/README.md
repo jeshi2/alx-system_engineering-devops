@@ -10,3 +10,4 @@
 9-John_Doe - hello to 753
 10-mirror_permission - mirror
 11-directories_permissions - add execute dir
+12-directory_permissions - create dir with 751
