@@ -4,3 +4,4 @@
 3-new_owner - change ownership
 4-empty - create file hello
 5-execute - add execute perm
+6-multiple_permissions - multiple 
