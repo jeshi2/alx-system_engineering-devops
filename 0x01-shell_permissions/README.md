@@ -6,3 +6,4 @@
 5-execute - add execute perm
 6-multiple_permissions - multiple 
 7-everybody - excute all
+8-James_Bond - other user all perm
