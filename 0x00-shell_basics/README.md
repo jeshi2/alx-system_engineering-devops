@@ -9,3 +9,4 @@
 8-firstdelete -delete betty
 9-firstdeletion - delete directory
 10-back - change directory back
+11-lists - lists
