@@ -11,3 +11,4 @@
 10-back - change directory back
 11-lists - lists
 12-file_type - file type
+13-symbolic_link - create a symbolic link
