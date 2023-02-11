@@ -2,3 +2,5 @@
 1-who-am_i - print current user
 2-groups - print groups of current user
 3-new_owner - change ownership
+4-empty - create file hello
+5-execute - add execute perm
