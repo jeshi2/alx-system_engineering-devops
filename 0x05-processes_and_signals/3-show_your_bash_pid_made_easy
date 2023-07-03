@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # This script displays the PID along with the process  name, of process whose name contain the word bash
 
-script_pid=$$
+#script_pid=$$
 
-processes=$(ps -eo pid,cmd | awk -v script_pid="$script_pid" '/bash/ && !/awk/ {print $1, $2}')
+#processes=$(ps -ef | awk -v script_pid="$script_pid" '/bash/ && !/awk/ {print $2, $8}')
 
-echo "$processes"
+#echo "$processes"
+pgrep -1 bash
