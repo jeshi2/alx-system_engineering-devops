@@ -6,4 +6,18 @@
 #processes=$(ps -ef | awk -v script_pid="$script_pid" '/bash/ && !/awk/ {print $2, $8}')
 
 #echo "$processes"
-pgrep -1 bash
+
+process_dirs=$(find /proc -maxdepth 1 -type d -name '[0-9]*')
+
+# Iterate over each process directory
+for dir in $process_dirs; do
+    # Extract the process ID from the directory name
+    pid=$(basename "$dir")
+
+    # Check if the process name contains the word "bash"
+    if grep -q "bash" "$dir/cmdline" 2>/dev/null; then
+        # Read the process name from the cmdline file and print the PID and process name
+        process_name=$(tr -d '\0' < "$dir/cmdline")
+        echo "$pid $process_name"
+    fi
+done
