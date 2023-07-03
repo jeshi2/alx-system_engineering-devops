@@ -1,20 +1,6 @@
 #!/usr/bin/env bash
 # This script displays the PID along with the process  name, of process whose name contain the word bash
 
-# get the list of directories in the /proc directory that are numeric
-pid_dirs=$(find /proc -maxdepth 1 -type d -name "[0-9]*" 2>/dev/null)
+processes=$(ps -eo pid,cmd | awk '/bash/ && !/awk/ {print $1, $2}')
 
-# Iterate over the process dir
-for dir in $pid_dirs; do
-	# Get process name from cmdline file
-	process_name=$(tr -d '\0' < "$dir/cmdline" 2>/dev/null)
-
-	# check if process name contains the word file
-	if [[ $process_name == *"bash"* ]]; then
-		# Extract the PID from the directory name
-		pid=$(basename "$dir")
-
-		# Print the PID and process name
-		echo "$pid $process_name"
-	fi
-done
+echo "$processes"
