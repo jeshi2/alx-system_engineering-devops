@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This script ping an ip address as an argument pings 5 times
+
+if [ -n "$1" ]
+then
+	ping "$1" -c5
+else
+	echo "Usage: 5-is_the_host_on_the_network {IP_ADDRESS}"
+fi
