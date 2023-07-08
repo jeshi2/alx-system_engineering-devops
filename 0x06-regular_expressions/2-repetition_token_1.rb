@@ -1,6 +1,2 @@
 #!/usr/bin/env ruby
-
-input = ARGV[0]
-
-matches = input.scan(/School/i)
-puts matches.join
+puts ARGV[0].scan(/h{1}b{1}?tn{1}/).join
