@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# Install HAProxy
+sudo apt update
+sudo apt install haproxy -y
+
+# Configure HAProxy to distribute traffic to web-01 and web-02
+cat <<EOL | sudo tee /etc/haproxy/haproxy.cfg
+global
+    log /dev/log local0
+    log /dev/log local1 notice
+    chroot /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode 660 level admin
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+
+defaults
+    log global
+    mode http
+    option httplog
+    option dontlognull
+    timeout connect 5000
+    timeout client 50000
+    timeout server 50000
+
+frontend http-in
+    bind *:80
+    default_backend servers
+
+backend servers
+    balance roundrobin
+    server 241249-web-01 54.89.117.155:80 check
+    server 241249-web-02 34.229.137.26:80 check
+EOL
+
+# Ensure HAProxy can be managed via an init script
+sudo sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/haproxy
+
+# Restart HAProxy service
+sudo service haproxy restart
+
+# Verify HAProxy configuration
+sudo haproxy -c -V -f /etc/haproxy/haproxy.cfg
+
+# Output success message
+echo "HAProxy has been installed and configured successfully."

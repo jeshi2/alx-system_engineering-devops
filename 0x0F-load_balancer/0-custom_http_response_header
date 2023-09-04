@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# configure web-02 to be identical to web-01
+
+# Install Nginx if it's not already installed
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Configure Nginx to add a custom response header
+cat <<EOL | sudo tee /etc/nginx/sites-available/custom_response_header
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    server_name _;
+
+    location / {
+        add_header X-Served-By \$hostname;
+        # Additional Nginx configuration can be added here if needed
+    }
+}
+EOL
+
+# Test the Nginx configuration for syntax errors
+sudo nginx -t
+
+# Reload Nginx to apply the new configuration
+sudo systemctl reload nginx
+
+# Clean up the default Nginx welcome page (optional)
+sudo rm /etc/nginx/sites-enabled/default
+
+# Restart Nginx to ensure changes take effect
+sudo systemctl restart nginx
+
+# Print a success message
+echo "Nginx has been configured with a custom X-Served-By header."
