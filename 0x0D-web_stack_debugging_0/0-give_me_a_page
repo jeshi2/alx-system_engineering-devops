@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# configuring my docker
+docker exec -ti 00d50b91a379 /bin/bash
+echo "ServerName localhost" >> /etc/apache2/apache2.conf
+service apache2 restart
