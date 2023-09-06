@@ -1,33 +1,24 @@
 #!/usr/bin/env bash
 # configure web-02 to be identical to web-01
 
-# Install Nginx if it's not already installed
-sudo apt-get update
-sudo apt-get install -y nginx
+FILE="/etc/nginx/sites-available/default"
+ERRORFILE="/usr/share/nginx/html/404error.html"
 
-# Configure Nginx to add a custom response header
-cat <<EOL | sudo tee /etc/nginx/sites-available/custom_response_header
-http {
-    server {
-                listen 80;
-                server_name _;
-                add_header X-Served-By $hostname;
-        }
+REDIRECT="\n\tlocation /redirect_me {\n\t\treturn 301 https://youtu.be/dQw4w9WgXcQ;\n\t}\n"
+ERRORREDIRECT="\n\terror_page 404 /404error.html;\n\tlocation = /404error.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}\n"
+CUSTOMHEADER='\n\tadd_header X-Served-By $hostname;\n'
 
-}
-EOL
+STRING="Hello World!"
+FOUR="Ceci n'est pas une page"
 
-# Test the Nginx configuration for syntax errors
-sudo nginx -t
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+echo "$STRING" > /var/www/html/index.nginx-debian.html
+sudo sed -i "37i\ $REDIRECT" "$FILE"
 
-# Reload Nginx to apply the new configuration
-sudo systemctl reload nginx
+echo "$FOUR" > "$ERRORFILE"
+sudo sed -i "37i\ $ERRORREDIRECT" "$FILE"
 
-# Clean up the default Nginx welcome page (optional)
-sudo rm /etc/nginx/sites-enabled/default
-
-# Restart Nginx to ensure changes take effect
-sudo systemctl restart nginx
-
-# Print a success message
-echo "Nginx has been configured with a custom X-Served-By header."
+sudo sed -i "37i\ $CUSTOMHEADER" "$FILE"
+sudo service nginx restart
