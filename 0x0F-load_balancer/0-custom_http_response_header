@@ -7,16 +7,13 @@ sudo apt-get install -y nginx
 
 # Configure Nginx to add a custom response header
 cat <<EOL | sudo tee /etc/nginx/sites-available/custom_response_header
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
+http {
+    server {
+                listen 80;
+                server_name _;
+                add_header X-Served-By $hostname;
+        }
 
-    server_name _;
-
-    location / {
-        add_header X-Served-By \$hostname;
-        # Additional Nginx configuration can be added here if needed
-    }
 }
 EOL
 
