@@ -22,3 +22,5 @@ sudo sed -i "37i\ $ERRORREDIRECT" "$FILE"
 
 sudo sed -i "37i\ $CUSTOMHEADER" "$FILE"
 sudo service nginx restart
+
+echo "Nginx has been configured with a custom X-Served-By header."
