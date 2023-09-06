@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# configure web-02 to be identical to web-01
+# configure web-02 to be identical to web-01.
 
 FILE="/etc/nginx/sites-available/default"
 ERRORFILE="/usr/share/nginx/html/404error.html"
