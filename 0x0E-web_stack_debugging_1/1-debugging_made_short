@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # script that make nginx listen on port80
-sudo systemctl stop nginx
 sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-sudo systemctl start nginx
+sudo service nginx start
+sudo kill "$(pgrep 'nginx' | head -1)"
