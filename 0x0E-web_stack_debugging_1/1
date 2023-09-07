@@ -1,8 +1,0 @@
-cp: cp: cannot create regular file '/etc/nginx/nginx.conf.backup'cannot create regular file '/etc/nginx/nginx.conf.backup': Permission denied: Permission denied
-
-./0-nginx_likes_port_80: line 15: /etc/nginx/nginx.conf: Permission denied
-./0-nginx_likes_port_80: line 15: /etc/nginx/nginx.conf: Permission denied
-Failed to restart nginx.service: Connection timed out
-See system logs and 'systemctl status nginx.service' for details.
-Failed to restart nginx.service: Connection timed out
-See system logs and 'systemctl status nginx.service' for details.
