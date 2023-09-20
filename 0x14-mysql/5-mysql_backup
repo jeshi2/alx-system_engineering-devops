@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Check if the password argument is provided
+# Check if the password argument is providd
 if [ $# -ne 1 ]; then
     echo "Usage: $0 <MySQL root password>"
     exit 1
