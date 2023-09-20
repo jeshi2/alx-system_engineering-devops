@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# Check if the password argument is provided
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <MySQL root password>"
+    exit 1
+fi
+
+# MySQL root password
+mysql_password="$1"
+
+# Directory where backups will be stored
+backup_dir="/var/backups/mysql"
+
+# Ensure the backup directory exists
+mkdir -p "$backup_dir"
+
+# Get the current date in the specified format
+backup_date=$(date +'%d-%m-%Y')
+
+# MySQL dump file name
+dump_file="backup.sql"
+
+# Full path to the MySQL dump file
+dump_file_path="$backup_dir/$dump_file"
+
+# Perform MySQL dump
+mysqldump -u root -p"$mysql_password" --all-databases > "$dump_file_path"
+
+# Check if the dump was successful
+if [ $? -eq 0 ]; then
+    # Create a compressed tar.gz archive with the dump file
+    archive_file="$backup_dir/$backup_date.tar.gz"
+    tar -czvf "$archive_file" -C "$backup_dir" "$dump_file"
+
+    # Check if the archive was created successfully
+    if [ $? -eq 0 ]; then
+        echo "MySQL dump and compression completed successfully."
+        echo "Archive file: $archive_file"
+    else
+        echo "Failed to create the archive."
+        exit 1
+    fi
+else
+    echo "MySQL dump failed. Please check the password and MySQL configuration."
+    exit 1
+fi
