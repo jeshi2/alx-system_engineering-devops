@@ -1,9 +1,10 @@
 #!/usr/bin/python3
-"""script that, using this REST API, for a given employee ID, 
+"""script that, using this REST API, for a given employee ID,
 returns information about his/her TODO list progress
 """
 import requests
 import sys
+
 
 def get_employee_todo_progress(employee_id):
     """Define the API endpoint URL"""
@@ -24,12 +25,15 @@ def get_employee_todo_progress(employee_id):
     completed_tasks = sum(1 for todo in todos_data if todo["completed"])
 
     # Display the employee's TODO list progress
-    print(f"Employee {user_data['name']} is done with tasks({completed_tasks}/{total_tasks}):")
+    print(
+        f"Employee {user_data['name']} is done with tasks(
+            {completed_tasks} / {total_tasks}): ")
 
     # Display the titles of completed tasks
     for todo in todos_data:
         if todo["completed"]:
             print(f"\t {todo['title']}")
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
