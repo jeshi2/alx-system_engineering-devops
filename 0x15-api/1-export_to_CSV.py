@@ -24,7 +24,7 @@ def get_employee_todo_progress(employee_id):
     # Create a CSV file for the user
     csv_filename = f"{employee_id}.csv"
     with open(csv_filename, mode='w', newline='') as csv_file:
-        csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_MINIMAL)
+        csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
 
         # Write task data to the CSV file
         for todo in todos_data:
