@@ -13,20 +13,20 @@ def get_employee_todo_progress(employee_id):
     user_url = f"{base_url}/users/{employee_id}"
     todos_url = f"{base_url}/todos?userId={employee_id}"
 
-    # Fetch employee data
+    """Fetch employee data"""
     user_response = requests.get(user_url)
     user_data = user_response.json()
 
-    # Fetch employee's TODO list
+    """Fetch employee's TODO list"""
     todos_response = requests.get(todos_url)
     todos_data = todos_response.json()
 
-    # Create a CSV file for the user
+    """Create a CSV file for the user"""
     csv_filename = f"{employee_id}.csv"
     with open(csv_filename, mode='w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
 
-        # Write task data to the CSV file
+        """Write task data to the CSV file"""
         for todo in todos_data:
             csv_writer.writerow([user_data['id'], user_data['username'],
                                  todo['completed'], todo['title']])
