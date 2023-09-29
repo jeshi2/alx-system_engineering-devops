@@ -5,6 +5,7 @@ Python script to export data in the CSV format
 import requests
 import sys
 import csv
+from csv import QUOTE_ALL
 
 
 def get_employee_todo_progress(employee_id):
@@ -30,7 +31,6 @@ def get_employee_todo_progress(employee_id):
         for todo in todos_data:
             csv_writer.writerow([user_data['id'], user_data['username'],
                                  todo['completed'], todo['title']])
-
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
