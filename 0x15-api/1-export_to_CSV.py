@@ -1,11 +1,14 @@
 #!/usr/bin/python3
-"""extend your Python script to export data in the CSV format"""
+"""
+Python script to export data in the CSV format
+"""
 import requests
 import sys
 import csv
 
+
 def get_employee_todo_progress(employee_id):
-    """Define the API endpoint URL"""
+    # Define the API endpoint URL
     base_url = "https://jsonplaceholder.typicode.com"
     user_url = f"{base_url}/users/{employee_id}"
     todos_url = f"{base_url}/todos?userId={employee_id}"
@@ -23,14 +26,11 @@ def get_employee_todo_progress(employee_id):
     with open(csv_filename, mode='w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_MINIMAL)
 
-        # Write the CSV header
-        csv_writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
-
         # Write task data to the CSV file
         for todo in todos_data:
-            csv_writer.writerow([user_data['id'], user_data['username'], todo['completed'], todo['title']])
+            csv_writer.writerow([user_data['id'], user_data['username'],
+                                 todo['completed'], todo['title']])
 
-    print(f"CSV file '{csv_filename}' created with task data for user {user_data['username']}.")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
