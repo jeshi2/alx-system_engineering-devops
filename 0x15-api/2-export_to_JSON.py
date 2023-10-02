@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """Python script to export data in the JSON format"""
+import csv
+import json
 import requests
 import sys
-import json
 
 
 def get_employee_todo_progress(employee_id):
@@ -15,7 +16,7 @@ def get_employee_todo_progress(employee_id):
     user_response = requests.get(user_url)
     user_data = user_response.json()
 
-    # Fetch employee's TODO list
+    """Fetch employee's todo list"""
     todos_response = requests.get(todos_url)
     todos_data = todos_response.json()
 
