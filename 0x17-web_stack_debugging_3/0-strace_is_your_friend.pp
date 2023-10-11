@@ -1,14 +1,6 @@
-# Ensure the missing file is present
+# Fixes Apache 500 error
 
-file { '/path/to/missing_file':
-  ensure => file,
-  source => 'puppet:///modules/mymodule/missing_file',
-}
-
-# Optionally, restart Apache
-
-service { 'apache2':
-  ensure  => 'running',
-  enable  => true,
-  require => File['/path/to/missing_file'],
+exec { 'fix-wordpress':
+  command => 'sed -i s/phpp/php/g /var/www/html/wp-settings.php',
+  path    => '/usr/local/bin/:/bin/'
 }
