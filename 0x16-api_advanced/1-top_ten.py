@@ -12,16 +12,27 @@ def top_ten(subreddit):
     first 10 hot posts for a subreddit.
 
     """
-    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    headers = {'User-Agent': 'Mozilla/5.0'}
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
+    headers = {'User-Agent': 'MyBot/1.0 (by YourUsername)'} 
+
     try:
-        response = requests.get(url, headers=headers,
-                                allow_redirects=False)
+        response = requests.get(url, headers=headers, allow_redirects=False)
         if response.status_code == 200:
-            children = response.json().get('data').get('children')
-            for i in range(10):
-                print(children[i].get('data').get('title'))
+            data = response.json()
+            posts = data['data']['children']
+            
+            for i, post in enumerate(posts[:10]):
+                print(f"{i+1}. {post['data']['title']}")
         else:
             print("None")
-    except Exception:
-        print("None") 
+    except Exception as e:
+        print("None")
+
+if __name__ == '__main__':
+    import sys
+
+    if len(sys.argv) < 2:
+        print("Please pass an argument for the subreddit to search.")
+    else:
+        subreddit = sys.argv[1]
+        top_ten(subreddit)
