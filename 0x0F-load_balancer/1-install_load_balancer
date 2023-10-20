@@ -30,8 +30,8 @@ frontend http-in
 
 backend servers
     balance roundrobin
-    server 241249-web-01 54.89.117.155:80 check
-    server 241249-web-02 34.229.137.26:80 check
+    server 241249-web-01 100.25.191.85:80 check
+    server 241249-web-02 18.206.197.38:80 check
 EOL
 
 # Ensure HAProxy can be managed via an init script
