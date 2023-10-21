@@ -1,13 +1,3 @@
 #!/usr/bin/env  bash
 # Find the PID of the Gunicorn master process
-PID=$(pgrep -f "gunicorn.*web_dynamic.2-hbnb:app")
-
-if [ -z "$PID" ]; then
-  echo "Gunicorn master process not found."
-  exit 1
-fi
-
-# Send a HUP signal to the Gunicorn master process
-kill -HUP "$PID"
-
-echo "Reloading Gunicorn master process (PID: $PID)."
+kill -HUP $(pgrep -o -f "gunicorn.*web_dynamic.2-hbnb:app")
