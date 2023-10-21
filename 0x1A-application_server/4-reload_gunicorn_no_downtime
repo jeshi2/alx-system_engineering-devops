@@ -8,6 +8,6 @@ if [ -z "$PID" ]; then
 fi
 
 # Send a HUP signal to the Gunicorn master process
-kill -HUP $PID
+kill -HUP "$PID"
 
 echo "Reloading Gunicorn master process (PID: $PID)."
