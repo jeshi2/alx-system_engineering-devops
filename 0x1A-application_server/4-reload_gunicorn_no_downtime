@@ -1,3 +1,4 @@
-#!/usr/bin/env  bash
-# Find the PID of the Gunicorn master process
-kill -HUP $(pgrep -o -f "gunicorn.*web_dynamic.2-hbnb:app")
+#!/usr/bin/env bash
+# Gracefully reloads Gunicorn.
+
+ps aux | grep gunicorn | awk '{ print $2 }' | xargs kill -HUP
