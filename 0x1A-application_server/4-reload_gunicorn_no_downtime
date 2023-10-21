@@ -1,4 +1,4 @@
 #!/usr/bin/env  bash
 # Get the process ID of the Gunicorn master process
 
-ps aux | grep gunicorn | awk '{ print $2 }' | xargs kill -HUP
+pgrep | grep gunicorn | awk '{ print $2 }' | xargs kill -HUP
