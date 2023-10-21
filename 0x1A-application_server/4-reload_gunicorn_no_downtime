@@ -1,5 +1,4 @@
 #!/usr/bin/env  bash
-
 # Get the process ID of the Gunicorn master process
 PID=$(pgrep aux | grep 'gunicorn' | grep 'master' | awk '{print $2}')
 
