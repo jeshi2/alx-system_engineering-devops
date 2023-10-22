@@ -4,12 +4,8 @@ user { 'holberton':
   ensure => 'present',
 }
 
-# Increase open file limit for the user
-class { 'limits':
-  limits => {
-    'holberton' => {
-      'hard' => 'unlimited',
-      'soft' => 'unlimited',
-    },
-  },
+# Set ulimit for the user
+file { '/etc/security/limits.d/holberton.conf':
+  ensure  => 'present',
+  content => "holberton hard nofile unlimited\nholberton soft nofile unlimited\n",
 }
