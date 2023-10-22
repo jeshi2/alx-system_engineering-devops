@@ -53,6 +53,7 @@ After applying the Puppet manifest (0-the_sky_is_the_limit_not.pp), the benchmar
 
 ```bash
 puppet apply 0-the_sky_is_the_limit_not.pp
+```
 
 ## Task 1: Identify and Fix High Open File Limit
 
